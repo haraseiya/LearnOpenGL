@@ -5,6 +5,9 @@
 #include <SDL_image.h>
 #include "Shader.h"
 #include "Math.h"
+#include <glm.hpp>
+#include <gtc/matrix_transform.hpp>
+#include <gtc/type_ptr.hpp>
 
 int main(int argc, char** argv)
 {
@@ -101,6 +104,7 @@ int main(int argc, char** argv)
     {
         format = GL_RGBA;
     }
+
     // SDLデータをGLのテクスチャデータとしてコピーする
     glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, surf1->pixels);
 
@@ -198,17 +202,17 @@ int main(int argc, char** argv)
     -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
     };
 
-    Vector3 cubePositions[] = {
-        Vector3(0.0f,  0.0f,  0.0f),
-        Vector3(2.0f,  5.0f, -15.0f),
-        Vector3(-1.5f, -2.2f, -2.5f),
-        Vector3(-3.8f, -2.0f, -12.3f),
-        Vector3(2.4f, -0.4f, -3.5f),
-        Vector3(-1.7f,  3.0f, -7.5f),
-        Vector3(1.3f, -2.0f, -2.5f),
-        Vector3(1.5f,  2.0f, -2.5f),
-        Vector3(1.5f,  0.2f, -1.5f),
-        Vector3(-1.3f,  1.0f, -1.5f)
+    glm::vec3 cubePositions[] = {
+    glm::vec3(0.0f,  0.0f,  0.0f),
+    glm::vec3(2.0f,  5.0f, -15.0f),
+    glm::vec3(-1.5f, -2.2f, -2.5f),
+    glm::vec3(-3.8f, -2.0f, -12.3f),
+    glm::vec3(2.4f, -0.4f, -3.5f),
+    glm::vec3(-1.7f,  3.0f, -7.5f),
+    glm::vec3(1.3f, -2.0f, -2.5f),
+    glm::vec3(1.5f,  2.0f, -2.5f),
+    glm::vec3(1.5f,  0.2f, -1.5f),
+    glm::vec3(-1.3f,  1.0f, -1.5f)
     };
 
     //unsigned int indices[] = {
@@ -280,18 +284,22 @@ int main(int argc, char** argv)
 
     Shader ourShader("vertex.vert", "fragment.frag");
 
-    static float anim;
-    Matrix4 model;
+    static float anim=0.1f;
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+    
+    glm::mat4 view = glm::mat4(1.0f);
+    view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
 
-    Matrix4 view;
-    Vector3 eye, focus, up;
-    eye = Vector3(0, 1, -3);
-    focus = Vector3(0, 0, 0);
-    up = Vector3(0, 1, 0);
-    view = Matrix4::CreateLookAt(eye, focus, up);
+    glm::mat4 projection;
+    projection = glm::perspective(glm::radians(45.0f),800.0f/600.0f,0.1f,100.0f);
 
-    Matrix4 projection;
-    projection = Matrix4::CreatePerspectiveFOV(Math::ToRadians(45.0f), 1024.0f, 768.0f, 0.1f, 1000.0f);
+    glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
+    glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
+    glm::vec3 cameraDirection = glm::normalize(cameraPos - cameraTarget);
+
+    glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+    glm::vec3 cameraRight = glm::normalize(glm::cross(up, cameraDirection));
 
     //レンダリングループ
     bool renderLoop = true;
@@ -332,26 +340,24 @@ int main(int argc, char** argv)
         unsigned int viewLocation = glGetUniformLocation(ourShader.ID, "view");
         unsigned int projectionLocation = glGetUniformLocation(ourShader.ID, "projection");
 
-        glUniformMatrix4fv(modelLocation, 1, GL_FALSE, model.GetAsFloatPtr());
-        glUniformMatrix4fv(viewLocation, 1, GL_FALSE, view.GetAsFloatPtr());
-        glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, projection.GetAsFloatPtr());
+        glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(model));
+        glUniformMatrix4fv(viewLocation, 1, GL_FALSE, glm::value_ptr(view));
+        glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, glm::value_ptr(projection));
 
-        anim += 0.001f;
-        model = Matrix4::CreateRotationX(anim) * Matrix4::CreateRotationZ(anim);
+        model = glm::rotate(model, anim * glm::radians(1.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+
         glBindVertexArray(VAO);
 
         glBindBuffer(GL_ARRAY_BUFFER, VAO);
         for (unsigned int i = 0; i < 10; i++)
         {
-            float angleOffset = Math::ToRadians(20.0f * i);
-            model = Matrix4::CreateRotationX(angleOffset + anim) * Matrix4::CreateRotationZ(angleOffset + anim);
-            model = model * Matrix4::CreateTranslation(cubePositions[i]);
-            glUniformMatrix4fv(modelLocation, 1, GL_FALSE, model.GetAsFloatPtr());
+            glm::mat4 model = glm::mat4(1.0f);
+            model = glm::translate(model, cubePositions[i]);
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
-        /*glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);*/
-        glDrawArrays(GL_TRIANGLES, 0, 36);
 
+        /*glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);*/
+        /*glDrawArrays(GL_TRIANGLES, 0, 36);*/
 
         // 画面のスワップ
         SDL_GL_SwapWindow(mWindow);
