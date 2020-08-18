@@ -94,17 +94,49 @@ void Shader::use()
 	glUseProgram(ID);
 }
 
-void Shader::setBool(const std::string& name, bool value) const
+void Shader::setBool(const std::string& valiableName, bool value) const
 {
-	glUniform1i(glGetUniformLocation(ID, name.c_str()), (int)value);
+	glUniform1i(glGetUniformLocation(ID, valiableName.c_str()), (int)value);
 }
 
-void Shader::setInt(const std::string& name, int value) const
+void Shader::setInt(const std::string& valiableName, int value) const
 {
-	glUniform1i(glGetUniformLocation(ID, name.c_str()), value);
+	unsigned int id = glGetUniformLocation(ID, valiableName.c_str());
+	glUniform1i(id, value);
 }
 
-void Shader::setFloat(const std::string& name, float value) const
+void Shader::setFloat(const std::string& valiableName, float value) const
 {
-	glUniform1f(glGetUniformLocation(ID, name.c_str()),value);
+	unsigned int id = glGetUniformLocation(ID, valiableName.c_str());
+	glUniform1f(id, value);
+}
+
+void Shader::setVec3(const std::string& valiableName, float x, float y, float z)
+{
+	unsigned int id = glGetUniformLocation(ID, valiableName.c_str());
+	glUniform3f(id, x, y, z);
+}
+
+void Shader::setVec3(const std::string& valiableName, Vector3& vec)
+{
+	unsigned int id = glGetUniformLocation(ID, valiableName.c_str());
+	glUniform3f(id, vec.x, vec.y, vec.z);
+}
+
+void Shader::setVec4(const std::string& valiableName, float x, float y, float z, float w)
+{
+	unsigned int id = glGetUniformLocation(ID, valiableName.c_str());
+	glUniform4f(id, x, y, z, w);
+}
+
+void Shader::setVec4(const std::string& valiableName, Vector3& vec, float w)
+{
+	unsigned int id = glGetUniformLocation(ID, valiableName.c_str());
+	glUniform4f(id, vec.x, vec.y, vec.z, w);
+}
+
+void Shader::setMatrix(const std::string& valiableName, const float* matrix)
+{
+	unsigned int id = glGetUniformLocation(ID, valiableName.c_str());
+	glUniformMatrix4fv(id, 1, GL_FALSE, matrix);
 }

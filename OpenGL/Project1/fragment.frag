@@ -6,7 +6,7 @@ in vec3 ourColor;   // 頂点シェーダーからの頂点カラーを入力として受け取る
 in vec2 TexCoord;   // 頂点シェーダーからの頂点座標を入力として受け取る
 
 uniform sampler2D texture1;   // 2次元テクスチャ型
-uniform sampler2D texture2;
+uniform sampler2D texture2; 
 
 void main()
 {

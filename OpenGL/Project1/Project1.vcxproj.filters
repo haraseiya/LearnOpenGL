@@ -5,46 +5,164 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="ソース ファイル\Input">
+      <UniqueIdentifier>{56aba4a2-3fe0-4dea-ac9e-8a0e54bd6f88}</UniqueIdentifier>
     </Filter>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="ソース ファイル\LearnMain">
+      <UniqueIdentifier>{061a7403-8e42-4731-9b45-bae768839cff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Shader">
+      <UniqueIdentifier>{30e11dcb-c57e-4303-9d91-84338294015f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Camera">
+      <UniqueIdentifier>{2c9eea20-c4f3-4319-8033-10287ac5c3da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Calculation">
+      <UniqueIdentifier>{7952a2f6-b312-4612-a479-11459d732a49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Library">
+      <UniqueIdentifier>{3f1fe738-5d12-4d3c-9cf4-29a44ce4a5b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Shader\Fragment">
+      <UniqueIdentifier>{d22b707f-426a-4504-ab9c-4300d6ce6e40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Shader\Vertex">
+      <UniqueIdentifier>{471e7ce9-6960-4dbc-a799-b28fccec309b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\LearnMain\Camera">
+      <UniqueIdentifier>{3eba6076-f970-4173-ace2-2b6790c158cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\LearnMain\Lighting">
+      <UniqueIdentifier>{1d30fa79-206d-4ce4-85e5-2b493755e1f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\LearnMain\LoadModel">
+      <UniqueIdentifier>{dcd8d990-2f13-4ed4-bd8a-c070a6590be5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Input.cpp">
+      <Filter>ソース ファイル\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>ソース ファイル\Input</Filter>
     </ClCompile>
     <ClCompile Include="Shader.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Shader</Filter>
     </ClCompile>
-    <ClCompile Include="lesson01.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="FlyCamera.cpp">
+      <Filter>ソース ファイル\Camera</Filter>
     </ClCompile>
     <ClCompile Include="Math.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Calculation</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Libraries\glad\src\glad.c">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="glad.c">
+      <Filter>ソース ファイル\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="WalkingCamera.cpp">
+      <Filter>ソース ファイル\LearnMain\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="RotingCamera.cpp">
+      <Filter>ソース ファイル\LearnMain\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Cordinate.cpp">
+      <Filter>ソース ファイル\LearnMain\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Color.cpp">
+      <Filter>ソース ファイル\LearnMain\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Lighting.cpp">
+      <Filter>ソース ファイル\LearnMain\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="PhoneLight.cpp">
+      <Filter>ソース ファイル\LearnMain\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>ソース ファイル\LearnMain\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="LightingMap.cpp">
+      <Filter>ソース ファイル\LearnMain\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectionalLight.cpp">
+      <Filter>ソース ファイル\LearnMain\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="PointLight.cpp">
+      <Filter>ソース ファイル\LearnMain\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="SpotLight.cpp">
+      <Filter>ソース ファイル\LearnMain\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="SoftEdge.cpp">
+      <Filter>ソース ファイル\LearnMain\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>ソース ファイル\LearnMain\LoadModel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Input.h">
+      <Filter>ソース ファイル\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="mouse.h">
+      <Filter>ソース ファイル\Input</Filter>
+    </ClInclude>
     <ClInclude Include="Shader.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ソース ファイル\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="FlyCamera.h">
+      <Filter>ソース ファイル\Camera</Filter>
     </ClInclude>
     <ClInclude Include="Math.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ソース ファイル\Calculation</Filter>
+    </ClInclude>
+    <ClInclude Include="Library.h">
+      <Filter>ソース ファイル\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>ソース ファイル\LearnMain\LoadModel</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="vertex.vert">
-      <Filter>リソース ファイル</Filter>
-    </None>
     <None Include="fragment.frag">
-      <Filter>リソース ファイル</Filter>
+      <Filter>ソース ファイル\Shader\Fragment</Filter>
+    </None>
+    <None Include="lightCube.frag">
+      <Filter>ソース ファイル\Shader\Fragment</Filter>
+    </None>
+    <None Include="lighting.frag">
+      <Filter>ソース ファイル\Shader\Fragment</Filter>
+    </None>
+    <None Include="vertex.vert">
+      <Filter>ソース ファイル\Shader\Vertex</Filter>
+    </None>
+    <None Include="PhoneLight.vert">
+      <Filter>ソース ファイル\Shader\Vertex</Filter>
+    </None>
+    <None Include="PhoneLight.frag">
+      <Filter>ソース ファイル\Shader\Fragment</Filter>
+    </None>
+    <None Include="lightCube.vert">
+      <Filter>ソース ファイル\Shader\Vertex</Filter>
+    </None>
+    <None Include="material.frag">
+      <Filter>ソース ファイル\Shader\Fragment</Filter>
+    </None>
+    <None Include="DiffuseMap.frag">
+      <Filter>ソース ファイル\Shader\Fragment</Filter>
+    </None>
+    <None Include="DiffuseMap.vert">
+      <Filter>ソース ファイル\Shader\Vertex</Filter>
+    </None>
+    <None Include="DirectionalLight.frag">
+      <Filter>ソース ファイル\Shader\Fragment</Filter>
+    </None>
+    <None Include="PointLight.frag">
+      <Filter>ソース ファイル\Shader\Fragment</Filter>
+    </None>
+    <None Include="SpotLight.frag">
+      <Filter>ソース ファイル\Shader\Fragment</Filter>
+    </None>
+    <None Include="SoftEdge.frag">
+      <Filter>ソース ファイル\Shader\Fragment</Filter>
     </None>
   </ItemGroup>
 </Project>
